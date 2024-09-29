@@ -43,24 +43,53 @@ Here’s an example of how to initialize and use the Feedforward Neural Network 
 
 ```python
 import numpy as np
-from fnn import FNN, FNL
+import FNL
+import ActivationFunctions as AF
+import NormalizeFunctions as NF
+import LossFunctions as LF
+#Load data from file
+dataSet = np.loadtxt(r'C:\Users\rooki\PycharmProjects\pythonProject1\trainer.csv', delimiter=',')
+#determine the amount of inputs
+inputSize = dataSet.shape[1] -1
+#determine your output size
+outputSize = 10
+#determine your structure of your Network (each row signifies the layers and the numbers signify nodes)
+layerSizeList = [300,300,300]
+#Specifying mathematical modules
+activationFunction = AF.ReLu()
+normalizeFunction = NF.SoftMax()
+lossFunction = LF.CrossEntropy()
 
-# Example usage
-input_size = 4
-output_size = 3
-hidden_layers = [5, 5]
-activation_fn = YourActivationFunction()  # Replace with actual activation function
-normalize_fn = YourNormalizationFunction()  # Replace with actual normalization function
-loss_fn = YourLossFunction()  # Replace with actual loss function
 
-# Create a neural network
-fnn = FNN(input_size, output_size, hidden_layers, activation_fn, normalize_fn, loss_fn)
+#Instantiate the FNN
+network = FNL.FNN(inputSize, outputSize, layerSizeList, activationFunction, normalizeFunction, lossFunction)
 
-# Perform forward propagation
-input_matrix = np.random.randn(input_size, 10)  # Example input matrix
-fnn.forwardPropagate(input_matrix)
+#iterate through batchs
+while True:
+    i = 0
+    while i < 10000:
+        i += 100
 
-# Perform backward propagation
-correct_labels = [0, 1, 0, 1, 1, 0, 0, 1, 0, 1]  # Example correct labels
-learning_rate = 0.01
-fnn.backwardPropagate(learning_rate, correct_labels)
+
+
+        batch = dataSet[i-100:i, 1:].T / 100
+        answer = dataSet[i-100:i, 0].tolist()
+
+        #feed the batch forward
+        network.forwardPropagate(batch)
+        #back propogate by identifying learning rate and answers
+        network.backwardPropagate(0.01,answer)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
