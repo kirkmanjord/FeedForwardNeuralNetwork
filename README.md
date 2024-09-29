@@ -1,6 +1,6 @@
 # Feedforward Neural Network (FNN) and Feedforward Neural Layer (FNL)
 
-This repository implements a simple Feedforward Neural Network (FNN) and Feedforward Neural Layer (FNL) in Python, using NumPy for matrix operations. The FNN class represents the entire network structure, while the FNL class models each individual layer within the network. This project allows for customization of network architecture, activation functions, normalization functions, and loss functions.
+This repository implements a Feedforward Neural Network (FNN) and Feedforward Neural Layer (FNL) in Python, using NumPy for matrix operations. The FNN class represents the entire network structure, while the FNL class models each individual layer within the network. This project allows for customization of network architecture, activation functions, normalization functions, and loss functions.
 
 ## Features
 
